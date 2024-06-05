@@ -48,16 +48,19 @@ class MainActivity : ComponentActivity() {
                         composable("menu") {
                             Menu(navController = navController)
                         }
-                        composable("abdominales") {
+                        composable("informacion") {
                             Informacion(navController = navController, favoritosViewModel)
                         }
-                        composable("Brazos") {
+                        composable("especificaciones") {
                             Especificaciones(navController = navController, favoritosViewModel)
                         }
-                        composable("Espalda") {
+                        composable("laptopEscritorio") {
                             LaptopEscritorio(navController = navController, favoritosViewModel)
                         }
                         composable("favoritos") {
+                            Favoritos(navController = navController, favoritosViewModel)
+                        }
+                        composable("buscar") {
                             Favoritos(navController = navController, favoritosViewModel)
                         }
                     }

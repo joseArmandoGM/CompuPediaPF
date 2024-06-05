@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -45,61 +46,8 @@ import androidx.navigation.NavHostController
 import com.example.compupediapf.data.Datasource
 import com.example.compupediapf.model.CartasEspecificaciones
 import androidx.compose.foundation.lazy.items
+import com.example.compupediapf.model.CartasComponentes
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun Especificaciones(
-    navController: NavHostController,
-    cartasEspecificaciones: CartasEspecificaciones,
-    onFavoriteClick: (CartasEspecificaciones) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    var isFavorite by remember { mutableStateOf(false) }
-
-    Card(
-        modifier = modifier
-            .padding(8.dp)
-            .fillMaxWidth()
-    ) {
-        Column {
-            Box {
-                Image(
-                    painter = painterResource(cartasEspecificaciones.imageResourceId),
-                    contentDescription = stringResource(cartasEspecificaciones.stringResourceId2),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(194.dp),
-                    contentScale = ContentScale.Crop
-                )
-                IconButton(
-                    onClick = {
-                        isFavorite = !isFavorite
-                        onFavoriteClick(cartasEspecificaciones)
-                    },
-                    modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .padding(8.dp)
-                ) {
-                    Icon(
-                        imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Default.FavoriteBorder,
-                        contentDescription = "Favorite",
-                        tint = if (isFavorite) Color.Red else Color.Gray
-                    )
-                }
-            }
-            Text(
-                text = stringResource(id = cartasEspecificaciones.stringResourceId2),
-                modifier = Modifier.padding(16.dp),
-                style = MaterialTheme.typography.headlineSmall
-            )
-            Text(
-                text = stringResource(id = cartasEspecificaciones.stringResourceId),
-                modifier = Modifier.padding(horizontal = 16.dp),
-                style = MaterialTheme.typography.bodyLarge
-            )
-        }
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -107,65 +55,31 @@ fun Especificaciones(navController: NavHostController, favoritosViewModel: Favor
     Scaffold(
         topBar = {
             TopAppBar(
-                title = {
-                    Text(
-                        text = "Especificaciones",
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(start = 16.dp)
-                    )
-                },
-                navigationIcon = {
-                    IconButton(
-                        onClick = { navController.popBackStack() },
-                        modifier = Modifier.padding(start = 8.dp)
-                    ) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
-                    }
-                },
-                modifier = Modifier.fillMaxWidth()
+                navController = navController,
+                "Especificaciones",
             )
         },
         bottomBar = {
-            BottomAppBar(
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
-            ) {
-                IconButton(onClick = { navController.navigate("favoritos") }) {
-                    Icon(
-                        Icons.Default.Favorite,
-                        contentDescription = "Favoritos",
-                        modifier = Modifier.size(36.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.weight(1f))
-                IconButton(onClick = { navController.navigate("menu") }) {
-                    Icon(
-                        Icons.Default.Home,
-                        contentDescription = "Home",
-                        modifier = Modifier.size(36.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.weight(1f))
-                IconButton(onClick = { /* Acción al hacer clic en el icono de calendario */ }) {
-                    Icon(
-                        Icons.Default.DateRange,
-                        contentDescription = "Calendar",
-                        modifier = Modifier.size(36.dp)
-                    )
-                }
-            }
+            BottomAppBar(navController = navController)
         }
     ) { innerPadding ->
+        Image(
+            painter = painterResource(id = R.drawable.fondo), // Asegúrate de tener una imagen en res/drawable
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
         LazyColumn(modifier = Modifier.padding(innerPadding)) {
-            items(Datasource().loadEspecificaciones()) { especificaciones ->
-                Especificaciones(
+            items(Datasource().loadComponentes()) { componentes ->
+                Componentes(
                     navController = navController,
-                    cartasEspecificaciones = especificaciones,
+                    cartasComponentes = componentes,
                     onFavoriteClick = { favoritosViewModel.agregarFavorito(it) },
                     modifier = Modifier.padding(8.dp)
                 )
             }
         }
+
     }
 }
 

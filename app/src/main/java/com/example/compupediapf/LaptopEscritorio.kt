@@ -45,63 +45,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.compupediapf.data.Datasource
 import androidx.compose.foundation.lazy.items
+import com.example.compupediapf.model.CartasComponentes
 import com.example.compupediapf.model.CartasLaptopEscritorio
 
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun LaptopEscritorio(
-    navController: NavHostController,
-    cartasLaptopEscritorio: CartasLaptopEscritorio,
-    onFavoriteClick: (CartasLaptopEscritorio) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    var isFavorite by remember { mutableStateOf(false) }
-
-    Card(
-        modifier = modifier
-            .padding(8.dp)
-            .fillMaxWidth()
-    ) {
-        Column {
-            Box {
-                Image(
-                    painter = painterResource(cartasLaptopEscritorio.imageResourceId),
-                    contentDescription = stringResource(cartasLaptopEscritorio.stringResourceId2),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(194.dp),
-                    contentScale = ContentScale.Crop
-                )
-                IconButton(
-                    onClick = {
-                        isFavorite = !isFavorite
-                        onFavoriteClick(cartasLaptopEscritorio)
-                    },
-                    modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .padding(8.dp)
-                ) {
-                    Icon(
-                        imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Default.FavoriteBorder,
-                        contentDescription = "Favorite",
-                        tint = if (isFavorite) Color.Red else Color.Gray
-                    )
-                }
-            }
-            Text(
-                text = stringResource(id = cartasLaptopEscritorio.stringResourceId),
-                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
-                style = MaterialTheme.typography.bodyLarge
-            )
-            Text(
-                text = stringResource(id = cartasLaptopEscritorio.stringResourceId2),
-                modifier = Modifier.padding(16.dp),
-                style = MaterialTheme.typography.headlineSmall
-            )
-        }
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -109,60 +55,19 @@ fun LaptopEscritorio(navController: NavHostController, favoritosViewModel: Favor
     Scaffold(
         topBar = {
             TopAppBar(
-                title = {
-                    Text(
-                        text = "Laptop y escritorio",
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(start = 16.dp)
-                    )
-                },
-                navigationIcon = {
-                    IconButton(
-                        onClick = { navController.popBackStack() },
-                        modifier = Modifier.padding(start = 8.dp)
-                    ) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
-                    }
-                },
-                modifier = Modifier.fillMaxWidth()
+                navController = navController,
+                "Laptop y escriorio",
             )
         },
         bottomBar = {
-            BottomAppBar(
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
-            ) {
-                IconButton(onClick = { navController.navigate("favoritos") }) {
-                    Icon(
-                        Icons.Default.Favorite,
-                        contentDescription = "Favoritos",
-                        modifier = Modifier.size(36.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.weight(1f))
-                IconButton(onClick = { navController.navigate("menu") }) {
-                    Icon(
-                        Icons.Default.Home,
-                        contentDescription = "Home",
-                        modifier = Modifier.size(36.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.weight(1f))
-                IconButton(onClick = { /* Acción al hacer clic en el icono de calendario */ }) {
-                    Icon(
-                        Icons.Default.DateRange,
-                        contentDescription = "Calendar",
-                        modifier = Modifier.size(36.dp)
-                    )
-                }
-            }
+            BottomAppBar(navController = navController)
         }
     ) { innerPadding ->
         LazyColumn(modifier = Modifier.padding(innerPadding)) {
-            items(Datasource().loadLaptopEscritorio()) { laptopEscritorio ->
-                LaptopEscritorio(
+            items(Datasource().loadComponentes()) { componentes ->
+                Componentes(
                     navController = navController,
-                    cartasLaptopEscritorio = laptopEscritorio,
+                    cartasComponentes = componentes,
                     onFavoriteClick = { favoritosViewModel.agregarFavorito(it) },
                     modifier = Modifier.padding(8.dp)
                 )

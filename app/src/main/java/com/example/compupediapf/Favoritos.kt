@@ -52,41 +52,13 @@ fun Favoritos(navController: NavHostController, favoritosViewModel: FavoritosVie
     Scaffold(
         topBar = {
             TopAppBar(
-                title = {
-                    Text(
-                        text = "Favoritos",
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(start = 16.dp)
-                    )
-                },
-                navigationIcon = {
-                    IconButton(
-                        onClick = { navController.popBackStack() },
-                        modifier = Modifier.padding(start = 8.dp)
-                    ) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
-                    }
-                },
-                modifier = Modifier.fillMaxWidth()
+                navController = navController,
+                "Favoritos"
             )
         },
         bottomBar = {
-            BottomAppBar(
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
-            ) {
-                IconButton(onClick = { navController.navigate("favoritos") }) {
-                    Icon(Icons.Default.Favorite, contentDescription = "Favoritos", modifier = Modifier.size(36.dp))
-                }
-                Spacer(modifier = Modifier.weight(1f))
-                IconButton(onClick = { navController.navigate("menu") }) {
-                    Icon(Icons.Default.Home, contentDescription = "Home", modifier = Modifier.size(36.dp))
-                }
-                Spacer(modifier = Modifier.weight(1f))
-                IconButton(onClick = { /* Acción al hacer clic en el icono de calendario */ }) {
-                    Icon(Icons.Default.DateRange, contentDescription = "Calendar", modifier = Modifier.size(36.dp))
-                }
-            }
+            BottomAppBar(navController = navController)
+
         }
     ) { innerPadding ->
         LazyColumn(modifier = Modifier.padding(innerPadding)) {
@@ -107,5 +79,8 @@ fun Favoritos(navController: NavHostController, favoritosViewModel: FavoritosVie
 @Preview(showBackground = true)
 @Composable
 fun FavoritosPreview() {
-    Favoritos(navController = NavHostController(LocalContext.current), favoritosViewModel = FavoritosViewModel())
+    Favoritos(
+        navController = NavHostController(LocalContext.current),
+        favoritosViewModel = FavoritosViewModel()
+    )
 }

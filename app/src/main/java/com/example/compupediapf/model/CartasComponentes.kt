@@ -4,7 +4,9 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
 data class CartasComponentes(
-    @StringRes val stringResourceId: Int,
-    @StringRes val stringResourceId2: Int,
-    @DrawableRes val imageResourceId: Int
+    @StringRes val cartaTitulo: Int,
+    @StringRes val cartaDescripcion: Int,
+    @StringRes val cartaEspecificacion: Int,
+    @StringRes val cartaLaptopEscritorio: Int,
+    @DrawableRes val cartaImagen: Int
 )

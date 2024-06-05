@@ -1,40 +1,19 @@
 package com.example.compupediapf
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.sharp.Favorite
-import androidx.compose.material.icons.sharp.Home
-import androidx.compose.material.icons.sharp.Search
-import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -53,33 +32,7 @@ import com.example.compupediapf.ui.theme.CompuPediaPFTheme
 fun Menu(navController: NavHostController) {
     Scaffold(
         bottomBar = {
-            BottomAppBar(
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
-            ) {
-                IconButton(onClick = { navController.navigate("favoritos") }) {
-                    Icon(
-                        Icons.Sharp.Favorite,
-                        contentDescription = "Favorite",
-                        modifier = Modifier.size(45.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.weight(1f))
-                IconButton(onClick = { /* Acción al hacer clic en el icono de casa */ }) {
-                    Icon(
-                        Icons.Sharp.Home,
-                        contentDescription = "Home",
-                        modifier = Modifier.size(45.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.weight(1f))
-                IconButton(onClick = { /* Acción al hacer clic en el icono de calendario */ }) {
-                    Icon(
-                        Icons.Sharp.Search,
-                        contentDescription = "Busqueda",
-                        modifier = Modifier.size(45.dp)
-                    )
-                }
-            }
+            BottomAppBar(navController = navController)
         }
     ) { innerPadding ->
         Box(
@@ -124,25 +77,25 @@ fun Menu(navController: NavHostController) {
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     ButtonRow(
-                        imageId = R.drawable.informacion,
+                        imagen = R.drawable.informacion,
                         titulo = "Información general",
                         descripcion = "Ayuda general sobre los componentes"
                     ) {
-                        navController.navigate("abdominales")
+                        navController.navigate("informacion")
                     }
                     ButtonRow(
-                        imageId = R.drawable.laptoppc,
+                        imagen = R.drawable.laptoppc,
                         titulo = "Laptop y escritorio",
                         descripcion = "Diferencias entre componentes de PC y laptops"
                     ) {
-                        navController.navigate("brazos")
+                        navController.navigate("laptopEscritorio")
                     }
                     ButtonRow(
-                        imageId = R.drawable.specs,
+                        imagen = R.drawable.specs,
                         titulo = "Especificaciones",
                         descripcion = "Muestra las caracteristicas de cada componente"
                     ) {
-                        navController.navigate("espalda")
+                        navController.navigate("especificaciones")
                     }
                 }
             }
@@ -150,47 +103,6 @@ fun Menu(navController: NavHostController) {
     }
 }
 
-@Composable
-fun ButtonRow(
-    @DrawableRes imageId: Int,
-    titulo: String,
-    descripcion: String,
-    onClick: () -> Unit
-) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(20.dp)) // Esquinas redondeadas
-            .background(Color(0xffa5c8ff))
-            .padding(8.dp)
-    ) {
-        Image(
-            painter = painterResource(id = imageId),
-            contentDescription = null,
-            modifier = Modifier
-                .size(150.dp)
-                .clip(CircleShape)
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        Column {
-            Text(
-                text = titulo,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(text = descripcion)
-            Button(
-                onClick = onClick,
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally), // Centrar verticalmente
-            ) {
-                Text(text = "VER MÁS")
-            }
-        }
-    }
-}
 
 @Preview(showBackground = true)
 @Composable
