@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
                             Favoritos(navController = navController, favoritosViewModel)
                         }
                         composable("buscar") {
-                            Favoritos(navController = navController, favoritosViewModel)
+                            Buscar(navController = navController)
                         }
                     }
                 }

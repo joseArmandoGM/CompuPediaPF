@@ -1,36 +1,45 @@
 <resources>
-    <string name="app_name">CompuPediaPF</string>
+    <string name="app_name">CompuPedia</string>
+
+    <string name="cajaBuscar">Buscar componente por su nombre</string>
+    <string name="pantallaBuscar">Buscar</string>
+    <string name="pantallaInformacion">Información</string>
+    <string name="pantallaEspecificaciones">Especificaciones</string>
+    <string name="pantallaLaptopEscritorio">Laptop y escritorio</string>
+    <string name="pantallaFavoritos">Favoritos</string>
 
     <string name="RAM_titulo">RAM</string>
-    <string name="RAM_descripcion">Almacena información de forma temporal</string>
-    <string name="RAM_especificaciones">Capacidad: Es la cantidad de datos que la memoria puede almacenar(GB).
-\nTipo de memoria: Hay diferentes tipos de RAM, como DDR3, DDR4, y DDR5, cada una con sus propias características y velocidades de transferencia de datos.
+    <string name="RAM_descripcion">Almacena información de forma temporal y accede a ella de forma rápida.</string>
+    <string name="RAM_especificaciones">Capacidad: Es la cantidad de datos que la memoria puede almacenar (GB).
+\nTipo de memoria: Hay diferentes tipos de RAM, como DDR3, DDR4 y DDR5, cada una con sus propias características y velocidades de transferencia de datos.
 \nFrecuencia: Se refiere a la velocidad a la que la memoria puede transferir datos.</string>
     <string name="RAM_laptopescritorio">La mayor diferencia radica en el tamaño de las memorias, pues cambia el DDR</string>
 
-
     <string name="CPU_titulo">Procesador</string>
-    <string name="CPU_descripcion">Computa todas las operaciones del equipo</string>
-    <string name="CPU_especificaciones">Modelo y Fabricante: Incluye el nombre del modelo de la CPU y la compañía que la fabrica (por ejemplo, Intel, AMD, etc.).
+    <string name="CPU_descripcion">Administra los dispositivos del equipo y procesa la información de las aplicaciones.</string>
+    <string name="CPU_especificaciones">Modelo y fabricante: Incluye el nombre del modelo de la CPU y la compañía que la fabrica (por ejemplo, Intel, AMD, etc.).
 \nArquitectura: La arquitectura de la CPU, que puede ser x86, x86-64, ARM, etc.
 \nNúmero de núcleos: La cantidad de núcleos físicos que tiene la CPU.</string>
-    <string name="CPU_laptopescritorio">Los procesadores de escritorio se pueden reemplazar ,mientras que los de laptop suelen venir unidos a la placa madre</string>
+    <string name="CPU_laptopescritorio">Los procesadores de escritorio se pueden reemplazar, mientras que los de laptop suelen venir unidos a la placa madre</string>
 
-
-    <string name="GPU_titulo">Tarjeta grafica</string>
-    <string name="GPU_descripcion">Procesa todo lo relacionado al video</string>
-    <string name="GPU_especificaciones">Núcleos de Procesamiento: La cantidad de núcleos de procesamiento o stream processors que tiene la GPU.
-\nFrecuencia del Reloj: La velocidad a la que funcionan los núcleos de la GPU, medida en MHz o GHz.
-\nMemoria de Video (VRAM): La cantidad de memoria dedicada de video que tiene la GPU.</string>
+    <string name="GPU_titulo">Tarjeta gráfica</string>
+    <string name="GPU_descripcion">Produce los gráficos y animaciones que se ven en pantalla.</string>
+    <string name="GPU_especificaciones">Núcleos de procesamiento: La cantidad de núcleos de procesamiento o stream processors que tiene la GPU.
+\nFrecuencia del reloj: La velocidad a la que funcionan los núcleos de la GPU, medida en MHz o GHz.
+\nMemoria de video (VRAM): La cantidad de memoria dedicada de video que tiene la GPU.</string>
     <string name="GPU_laptopescritorio">Al igual que con los procesadores, las tarjetas gráficas se pueden reemplazar en escritorio pero no en laptop</string>
 
-
     <string name="HDD_titulo">Disco duro</string>
-    <string name="HDD_descripcion">Guarda la información del equipo</string>
+    <string name="HDD_descripcion">Guarda los documentos del usuario y la información de los programas.</string>
     <string name="HDD_especificaciones">Tipo de disco: Puede ser un disco duro mecánico (HDD) o un disco de estado sólido (SSD).
 \nCapacidad de almacenamiento: La cantidad de datos que puede almacenar el disco, medida en gigabytes (GB) o terabytes (TB).
 \nInterfaz: La forma en que el disco se conecta a la placa base del ordenador, usualmente es SATA.</string>
-    <string name="HDD_laptopescritorio">El tamaño de los discos duros cambia, ya que en PC de escritorio son de 3.5 pulgadas, mientras que en laptop son de 2.5</string>
+    <string name="HDD_laptopescritorio">El tamaño de los discos duros cambia, ya que en PC de escritorio son de 3.5 pulgadas, mientras que en laptop son de 2.5.</string>
 
-
+    <string name="WIFI_titulo">Wi-Fi</string>
+    <string name="WIFI_descripcion">Permite al equipo conectarse inalambricamente a internet.</string>
+    <string name="WIFI_especificaciones">Velocidad de frecuencia:esto se expresa en Mbps (megabits por segundo) o Gbps (gigabits por segundo).
+\nFrecuencia: Los adaptadores Wi-Fi operan en diferentes rangos de frecuencia, como 2.4 GHz y 5 GHz.
+\nSeguridad: Los adaptadores de red admiten diferentes protocolos de seguridad, como WEP, WPA, o WPA2, que protegen la conexión contra accesos no autorizados.</string>
+    <string name="WIFI_laptopescritorio">Los adaptadores de Wi-Fi para laptops son más pequeños y están integrados en el dispositivo</string>
 </resources>

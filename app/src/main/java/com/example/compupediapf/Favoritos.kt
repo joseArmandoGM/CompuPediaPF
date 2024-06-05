@@ -1,5 +1,6 @@
 package com.example.compupediapf
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -25,10 +26,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.example.compupediapf.model.CartasComponentes
 
 // Favoritos.kt
@@ -53,7 +58,7 @@ fun Favoritos(navController: NavHostController, favoritosViewModel: FavoritosVie
         topBar = {
             TopAppBar(
                 navController = navController,
-                "Favoritos"
+                stringResource(id = R.string.pantallaFavoritos),
             )
         },
         bottomBar = {
@@ -61,6 +66,12 @@ fun Favoritos(navController: NavHostController, favoritosViewModel: FavoritosVie
 
         }
     ) { innerPadding ->
+        Image(
+            painter = painterResource(id = R.drawable.fondo),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
         LazyColumn(modifier = Modifier.padding(innerPadding)) {
             items(favoritosViewModel.favoritos) { item ->
                 when (item) {
@@ -68,7 +79,8 @@ fun Favoritos(navController: NavHostController, favoritosViewModel: FavoritosVie
                         navController = navController,
                         cartasComponentes = item,
                         onFavoriteClick = { favoritosViewModel.eliminarFavorito(it) },
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
+                        cartaTexto = "descripcion"
                     )
                 }
             }

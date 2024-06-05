@@ -1,5 +1,10 @@
 package com.example.compupediapf
 
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import android.os.Bundle
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -34,117 +39,121 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextField
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.widget.EditText
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.rememberNavController
+import com.example.compupediapf.data.Datasource
+import com.example.compupediapf.ui.theme.CompuPediaPFTheme
 
-class MainActivity : AppCompatActivity() {
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun Buscar(navController: NavHostController) {
+    val viewModel = viewModel<MainViewModel>()
+    val searchText by viewModel.searchText.collectAsState()
+    val componentes by viewModel.componentes.collectAsState()
+    val isSearching by viewModel.isSearching.collectAsState()
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                navController = navController,
+                stringResource(id = R.string.pantallaBuscar),
+            )
+        },
+        bottomBar = {
+            BottomAppBar(navController = navController)
+        }
+    ) { innerPadding ->
+        Box(modifier = Modifier.fillMaxSize()) {
+            Image(
+                painter = painterResource(id = R.drawable.fondo),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .padding(16.dp)
+            ) {
+                TextField(
+                    value = searchText,
+                    onValueChange = viewModel::onSearchTextChange,
+                    modifier = Modifier.fillMaxWidth(),
+                    placeholder = { Text(stringResource(id = R.string.cajaBuscar)) }
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: CartasAdapter
-    private lateinit var searchEditText: EditText
-
-    private var cartasComponentesList = mutableListOf<CartasComponentes>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        // Inicializar la lista de cartasComponentes (sustituye esto con tus datos)
-        // cartasComponentesList = obtenerCartasComponentes()
-
-        // Configurar RecyclerView
-        recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = CartasAdapter(cartasComponentesList)
-        recyclerView.adapter = adapter
-
-        // Configurar EditText de búsqueda
-        searchEditText = findViewById(R.id.searchEditText)
-        searchEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                filter(s.toString())
-            }
-        })
-    }
-
-    private fun filter(text: String) {
-        val filteredList = mutableListOf<CartasComponentes>()
-
-        for (item in cartasComponentesList) {
-            if (item.cartaTitulo.contains(text, true)) {
-                filteredList.add(item)
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(1f)
+                ) {
+                    items(componentes) { componente ->
+                        Card(
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .fillMaxWidth()
+                        ) {
+                            Column {
+                                Box {
+                                    Image(
+                                        painter = painterResource(componente.cartaImagen),
+                                        contentDescription = stringResource(componente.cartaDescripcion),
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(194.dp),
+                                        contentScale = ContentScale.Crop
+                                    )
+                                }
+                                Text(
+                                    text = stringResource(id = componente.cartaTitulo),
+                                    modifier = Modifier
+                                        .padding(horizontal = 16.dp)
+                                        .padding(top = 10.dp),
+                                    style = MaterialTheme.typography.bodyLarge.copy(
+                                        fontSize = 28.sp,
+                                        fontWeight = FontWeight.Bold  // Poner el texto en negrita
+                                    )
+                                )
+                                Text(
+                                    text = stringResource(id = componente.cartaDescripcion),
+                                    modifier = Modifier.padding(16.dp),
+                                    style = MaterialTheme.typography.headlineSmall
+                                )
+                            }
+                        }
+                    }
+                }
             }
         }
-
-        adapter.filterList(filteredList)
     }
 
-    // Función para obtener la lista de CartasComponentes (sustituye esto con tus datos)
-    /*
-    private fun obtenerCartasComponentes(): MutableList<CartasComponentes> {
-        // Implementa lógica para obtener la lista de cartasComponentes de tu fuente de datos
-    }
-    */
 }
-
-// Clase de ejemplo CartasComponentes (sustituye esto con tu propia implementación)
-data class CartasComponentes(val cartaTitulo: String)
-
-// Adaptador para RecyclerView
-class CartasAdapter(private var cartasComponentesList: MutableList<CartasComponentes>) :
-    RecyclerView.Adapter<CartasAdapter.ViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_carta, parent, false)
-        return ViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val cartaComponente = cartasComponentesList[position]
-        holder.bind(cartaComponente)
-    }
-
-    override fun getItemCount(): Int {
-        return cartasComponentesList.size
-    }
-
-    fun filterList(filteredList: MutableList<CartasComponentes>) {
-        cartasComponentesList = filteredList
-        notifyDataSetChanged()
-    }
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(cartasComponentes: CartasComponentes) {
-            // Implementa la lógica para mostrar los datos de la carta en el ViewHolder
-        }
-    }
-}
-
 
 
 @Preview(showBackground = true)
 @Composable
 fun BuscarPreview() {
     Buscar(
-        navController = NavHostController(LocalContext.current),
-        favoritosViewModel = FavoritosViewModel()
+        navController = NavHostController(LocalContext.current)
     )
 }

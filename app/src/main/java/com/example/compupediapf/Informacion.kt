@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -61,13 +62,20 @@ fun Informacion(navController: NavHostController, favoritosViewModel: FavoritosV
             BottomAppBar(navController = navController)
         }
     ) { innerPadding ->
+        Image(
+            painter = painterResource(id = R.drawable.fondo),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
         LazyColumn(modifier = Modifier.padding(innerPadding)) {
             items(Datasource().loadComponentes()) { componentes ->
                 Componentes(
                     navController = navController,
                     cartasComponentes = componentes,
                     onFavoriteClick = { favoritosViewModel.agregarFavorito(it) },
-                    modifier = Modifier.padding(8.dp)
+                    modifier = Modifier.padding(8.dp),
+                    cartaTexto = "descripcion"
                 )
             }
         }

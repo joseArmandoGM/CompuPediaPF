@@ -3,6 +3,7 @@ package com.example.compupediapf
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -83,7 +84,7 @@ fun BottomAppBar(navController: NavController) {
                 )
             }
             Spacer(modifier = Modifier.weight(.15f))
-            IconButton(onClick = { /* Acción al hacer clic en el icono de calendario */ }) {
+            IconButton(onClick = { navController.navigate("buscar") }) {
                 Icon(
                     Icons.Default.Search,
                     contentDescription = "Buscar",
@@ -167,6 +168,7 @@ fun Componentes(
     navController: NavHostController,
     cartasComponentes: CartasComponentes,
     onFavoriteClick: (CartasComponentes) -> Unit,
+    cartaTexto: String,
     modifier: Modifier = Modifier
 ) {
     var isFavorite by remember { mutableStateOf(false) }
@@ -179,7 +181,11 @@ fun Componentes(
         Column {
             Box {
                 Image(
-                    painter = painterResource(cartasComponentes.cartaImagen),
+                    painter = when (cartaTexto) {
+                        "especificaciones" -> painterResource(cartasComponentes.cartaImagen)
+                        "laptopEscritorio" -> painterResource(cartasComponentes.cartaImagenLaptopEscritorio)
+                        else -> painterResource(cartasComponentes.cartaImagen)
+                    },
                     contentDescription = stringResource(cartasComponentes.cartaDescripcion),
                     modifier = Modifier
                         .fillMaxWidth()
@@ -190,10 +196,12 @@ fun Componentes(
                     onClick = {
                         isFavorite = !isFavorite
                         onFavoriteClick(cartasComponentes)
+
                     },
                     modifier = Modifier
                         .align(Alignment.TopEnd)
-                        .padding(8.dp)
+                        .padding(10.dp)
+                        .background(Color(0xFFD3D3D3), CircleShape)
                 ) {
                     Icon(
                         imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Default.FavoriteBorder,
@@ -202,16 +210,25 @@ fun Componentes(
                     )
                 }
             }
-            Text(
-                text = stringResource(id = cartasComponentes.cartaDescripcion),
-                modifier = Modifier.padding(16.dp),
-                style = MaterialTheme.typography.headlineSmall
-            )
-            Text(
-                text = stringResource(id = cartasComponentes.cartaTitulo),
-                modifier = Modifier.padding(horizontal = 16.dp),
-                style = MaterialTheme.typography.bodyLarge
-            )
         }
+        Text(
+            text = stringResource(id = cartasComponentes.cartaTitulo),
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .padding(top = 10.dp),
+            style = MaterialTheme.typography.bodyLarge.copy(
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold
+            )
+        )
+        Text(
+            text = when (cartaTexto) {
+                "especificaciones" -> stringResource(id = cartasComponentes.cartaEspecificacion)
+                "laptopEscritorio" -> stringResource(id = cartasComponentes.cartaLaptopEscritorio)
+                else -> stringResource(id = cartasComponentes.cartaDescripcion)// En caso de no coincidir con ningún texto
+            },
+            modifier = Modifier.padding(16.dp),
+            style = MaterialTheme.typography.headlineSmall
+        )
     }
 }
