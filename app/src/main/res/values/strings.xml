@@ -13,21 +13,21 @@
     <string name="RAM_especificaciones">Capacidad: Es la cantidad de datos que la memoria puede almacenar (GB).
 \nTipo de memoria: Hay diferentes tipos de RAM, como DDR3, DDR4 y DDR5, cada una con sus propias características y velocidades de transferencia de datos.
 \nFrecuencia: Se refiere a la velocidad a la que la memoria puede transferir datos.</string>
-    <string name="RAM_laptopescritorio">La mayor diferencia radica en el tamaño de las memorias, pues cambia el DDR</string>
+    <string name="RAM_laptopescritorio">La mayor diferencia radica en el tamaño de las memorias, pues cambia en laptop las memorias son más pequeñas.</string>
 
     <string name="CPU_titulo">Procesador</string>
     <string name="CPU_descripcion">Administra los dispositivos del equipo y procesa la información de las aplicaciones.</string>
     <string name="CPU_especificaciones">Modelo y fabricante: Incluye el nombre del modelo de la CPU y la compañía que la fabrica (por ejemplo, Intel, AMD, etc.).
 \nArquitectura: La arquitectura de la CPU, que puede ser x86, x86-64, ARM, etc.
 \nNúmero de núcleos: La cantidad de núcleos físicos que tiene la CPU.</string>
-    <string name="CPU_laptopescritorio">Los procesadores de escritorio se pueden reemplazar, mientras que los de laptop suelen venir unidos a la placa madre</string>
+    <string name="CPU_laptopescritorio">Los procesadores de escritorio se pueden reemplazar, mientras que los de laptop suelen venir unidos a la placa madre.</string>
 
     <string name="GPU_titulo">Tarjeta gráfica</string>
     <string name="GPU_descripcion">Produce los gráficos y animaciones que se ven en pantalla.</string>
     <string name="GPU_especificaciones">Núcleos de procesamiento: La cantidad de núcleos de procesamiento o stream processors que tiene la GPU.
 \nFrecuencia del reloj: La velocidad a la que funcionan los núcleos de la GPU, medida en MHz o GHz.
 \nMemoria de video (VRAM): La cantidad de memoria dedicada de video que tiene la GPU.</string>
-    <string name="GPU_laptopescritorio">Al igual que con los procesadores, las tarjetas gráficas se pueden reemplazar en escritorio pero no en laptop</string>
+    <string name="GPU_laptopescritorio">Al igual que con los procesadores, las tarjetas gráficas se pueden reemplazar en escritorio pero no en laptop.</string>
 
     <string name="HDD_titulo">Disco duro</string>
     <string name="HDD_descripcion">Guarda los documentos del usuario y la información de los programas.</string>
@@ -41,5 +41,5 @@
     <string name="WIFI_especificaciones">Velocidad de frecuencia:esto se expresa en Mbps (megabits por segundo) o Gbps (gigabits por segundo).
 \nFrecuencia: Los adaptadores Wi-Fi operan en diferentes rangos de frecuencia, como 2.4 GHz y 5 GHz.
 \nSeguridad: Los adaptadores de red admiten diferentes protocolos de seguridad, como WEP, WPA, o WPA2, que protegen la conexión contra accesos no autorizados.</string>
-    <string name="WIFI_laptopescritorio">Los adaptadores de Wi-Fi para laptops son más pequeños y están integrados en el dispositivo</string>
+    <string name="WIFI_laptopescritorio">Los adaptadores de Wi-Fi para laptops son más pequeños y están integrados en el dispositivo.</string>
 </resources>
